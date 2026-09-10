@@ -1,0 +1,313 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #07111f;
+    color: white;
+}
+
+
+/* NAVBAR */
+
+.navbar {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 55px;
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 20px;
+}
+
+.logo span {
+    font-size: 32px;
+    font-weight: bold;
+    color: #65a9ff;
+}
+
+.navbar nav {
+    display: flex;
+    gap: 35px;
+}
+
+.navbar nav a,
+.nav-actions a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.navbar nav a:hover {
+    color: #65a9ff;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-actions button {
+    background: transparent;
+    color: white;
+    border: 1px solid #6b87a8;
+    border-radius: 10px;
+    padding: 12px 20px;
+}
+
+
+/* HERO */
+
+.hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 55% 45%;
+	overflow: hidden;
+}
+
+
+/* LEFT */
+
+.intro {
+    background: #08121f;
+    padding: 190px 8% 60px;
+    position: relative;
+}
+
+.hello {
+    color: #b8c4d5;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.intro h1 {
+    font-size: clamp(55px, 6vw, 90px);
+    line-height: 0.95;
+    margin-bottom: 25px;
+}
+
+.intro h1 span {
+    color: #4da3ff;
+}
+
+.intro h2 {
+    color: #67aaff;
+    letter-spacing: 5px;
+    font-size: 22px;
+    margin-bottom: 35px;
+}
+
+.intro h2 b {
+    color: #71829a;
+}
+
+.description {
+    max-width: 520px;
+    color: #aebbd0;
+    line-height: 1.8;
+    font-size: 17px;
+}
+
+
+/* BUTTONS */
+
+.buttons {
+    display: flex;
+    gap: 18px;
+    margin-top: 40px;
+}
+
+.primary-btn,
+.secondary-btn {
+    padding: 16px 25px;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+.primary-btn {
+    background: #3185ff;
+    color: white;
+}
+
+.secondary-btn {
+    border: 1px solid #54708f;
+    color: white;
+}
+
+
+/* STATS */
+
+.stats {
+    display: flex;
+    gap: 50px;
+    margin-top: 80px;
+}
+
+.stats div {
+    display: flex;
+    flex-direction: column;
+}
+
+.stats strong {
+    color: #62a8ff;
+    font-size: 28px;
+}
+
+.stats span {
+    color: #aebbd0;
+    margin-top: 5px;
+}
+
+.location {
+    margin-top: 70px;
+    color: #aebbd0;
+}
+
+
+/* ARCHIE */
+
+.archie {
+    background:
+        radial-gradient(
+            circle at 80% 20%,
+            #e8e5ff,
+            #ffffff 55%
+        );
+
+    color: #16243a;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 100px 8% 120x;
+    text-align: center;
+
+    border-radius: 80px 0 0 80px;
+	position: relative;
+	ocerflow: hidden;
+}
+
+
+.archie-icon {
+    font-size: 38px;
+    margin-bottom: 25px;
+}
+
+.archie-intro {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.archie h2 {
+    font-size: clamp(40px, 4vw, 62px);
+    margin-bottom: 20px;
+}
+
+.archie h2 span {
+    background: linear-gradient(
+        90deg,
+        #247cff,
+        #b52dff
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.archie-description {
+    max-width: 600px;
+    margin: auto;
+    line-height: 1.6;
+    color: #526078;
+}
+
+
+/* CHAT */
+
+
+.chat-box {
+	position: absolute;
+	left: 8%;
+    right: 8%;
+    bottom: 55px;
+
+	
+	
+    margin-top: 1px;
+    display: flex;
+
+    background: white;
+    border-radius: 40px;
+    padding: 7px;
+
+    box-shadow: 0 10px 35px rgba(50, 80, 130, 0.15);
+}
+
+.chat-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 16px 22px;
+    font-size: 16px;
+}
+
+.chat-box button {
+    width: 52px;
+    height: 52px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #347fff;
+    color: white;
+
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.hint {
+    margin-top: 20px;
+    color: #68778f;
+    font-size: 14px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 900px) {
+
+    .navbar nav,
+    .nav-actions {
+        display: none;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+    }
+
+    .intro {
+        padding-top: 130px;
+    }
+
+    .archie {
+        border-radius: 0;
+    }
+
+
+    .stats {
+        gap: 25px;
+    }
+}

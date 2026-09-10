@@ -1,0 +1,152 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sukhwinder | AI • Data • Software</title>
+
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        <span>SS</span>
+        <strong>Sukhwinder</strong>
+    </div>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Projects</a>
+        <a href="#">Skills</a>
+        <a href="#">Experience</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <div class="nav-actions">
+        <a href="#">GitHub</a>
+        <a href="#">LinkedIn</a>
+        <button>Download Resume</button>
+    </div>
+
+</header>
+
+
+<main class="hero">
+
+    <!-- LEFT SIDE -->
+
+    <section class="intro">
+
+        <p class="hello">Hello, I'm</p>
+
+        <h1>
+            Sukhwinder<span>.</span>
+        </h1>
+
+        <h2>
+            AI <b>•</b> Data <b>•</b> Software
+        </h2>
+
+        <p class="description">
+            Computer Science background with a passion
+            for solving real-world problems using AI,
+            data and technology.
+        </p>
+
+        <div class="buttons">
+
+            <a href="#" class="primary-btn">
+                View My Work →
+            </a>
+
+            <a href="#" class="secondary-btn">
+                About Me
+            </a>
+
+        </div>
+
+        <div class="stats">
+
+            <div>
+                <strong>5+</strong>
+                <span>Projects</span>
+            </div>
+
+            <div>
+                <strong>3+</strong>
+                <span>Years Experience</span>
+            </div>
+
+            <div>
+                <strong>∞</strong>
+                <span>Always Learning</span>
+            </div>
+
+        </div>
+
+        <div class="location">
+            📍 Based in Ontario, Canada
+        </div>
+
+    </section>
+
+
+    <!-- RIGHT SIDE -->
+
+    <section class="archie">
+
+        <div class="archie-icon">
+            ✦
+        </div>
+
+        <p class="archie-intro">
+            Hey, I'm Archie 👋
+        </p>
+
+        <h2>
+            Ask Me <span>Anything</span>
+        </h2>
+
+        <p class="archie-description">
+            Ask me anything about Sukhwinder —
+            his skills, projects, experience,
+            education, or career goals!
+        </p>
+
+
+      
+
+        <div class="chat-box">
+
+            <input
+                type="text"
+                placeholder="Ask me anything..."
+                id="question"
+            >
+
+            <button id="askButton">
+                →
+            </button>
+
+        </div>
+
+        <p class="hint">
+            💡 Try asking about projects, skills, experience, or anything else!
+        </p>
+
+    </section>
+
+</main>
+
+
+<script src="{% static 'main/js/script.js' %}"></script>
+
+</body>
+</html>
