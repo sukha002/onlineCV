@@ -31,8 +31,9 @@ ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
     "sukhwindersingh-gndadxcec2h0dbfr.canadacentral-01.azurewebsites.net",
+    "sukhwindertoor.com",
+    "www.sukhwindertoor.com",
 ]
-
 
 # Application definition
 
