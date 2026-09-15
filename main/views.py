@@ -7,5 +7,4 @@ def home(request):
 
 
 def about(request):
-    text = "Hello, this text is returned in the Django view!"
-    return HttpResponse(text)
+    return render(about, "main/about.html")
