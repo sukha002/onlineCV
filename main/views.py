@@ -8,3 +8,7 @@ def home(request):
 
 def about(request):
     return render(about, "main/about.html")
+
+
+def deploymentbook(request):
+    return render(request, "main/deploymentbook.html")

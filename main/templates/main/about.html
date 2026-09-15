@@ -1,928 +1,569 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>My Journey</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    <title>About Me | Sukhwinder Singh</title>
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #ffffff;
-            color: #0f172a;
-        }
+    <link rel="stylesheet"
+          href="{% static 'main/css/about.css' %}">
 
-        /* =========================
-           HERO
-        ========================= */
-
-        .journey-header {
-            text-align: center;
-            padding: 100px 20px 60px;
-        }
-
-        .journey-label {
-            color: #2563eb;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-        }
-
-        .journey-header h1 {
-            font-size: clamp(40px, 7vw, 72px);
-            line-height: 1;
-            margin-bottom: 20px;
-        }
-
-        .journey-header p {
-            max-width: 650px;
-            margin: auto;
-            color: #64748b;
-            font-size: 17px;
-            line-height: 1.7;
-        }
-
-
-        /* =========================
-           TIMELINE
-        ========================= */
-
-        .timeline-wrapper {
-            width: min(1000px, 92%);
-            margin: auto;
-            position: relative;
-            padding: 40px 0 120px;
-        }
-
-        /* Main vertical line */
-
-        .timeline-line {
-            position: absolute;
-
-            left: 50%;
-            top: 0;
-            bottom: 0;
-
-            width: 3px;
-
-            background: #dbe3ef;
-
-            transform: translateX(-50%);
-        }
-
-
-        /* Blue progress line */
-
-        .timeline-progress {
-            position: absolute;
-
-            left: 50%;
-            top: 0;
-
-            width: 4px;
-            height: 0;
-
-            background: #2563eb;
-
-            transform: translateX(-50%);
-
-            border-radius: 10px;
-
-            transition: height 0.08s linear;
-        }
-
-
-        /* =========================
-           AVATAR
-        ========================= */
-
-        .avatar {
-            position: absolute;
-
-            left: 50%;
-
-            top: 0;
-
-            width: 70px;
-            height: 70px;
-
-            transform: translate(-50%, -50%);
-
-            border-radius: 50%;
-
-            background: #0f172a;
-
-            border: 4px solid #2563eb;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            font-size: 35px;
-
-            z-index: 10;
-
-            box-shadow:
-                0 0 0 8px rgba(37, 99, 235, 0.10),
-                0 10px 30px rgba(15, 23, 42, 0.18);
-
-            transition: top 0.08s linear;
-        }
-
-
-        /* =========================
-           TIMELINE ITEM
-        ========================= */
-
-        .timeline-item {
-            position: relative;
-
-            width: 50%;
-
-            min-height: 280px;
-
-            padding: 20px 55px 70px 0;
-
-            opacity: 0.35;
-
-            transform: translateY(20px);
-
-            transition:
-                opacity 0.5s ease,
-                transform 0.5s ease;
-        }
-
-
-        .timeline-item:nth-child(even) {
-            margin-left: 50%;
-
-            padding:
-                20px
-                0
-                70px
-                55px;
-        }
-
-
-        .timeline-item.active {
-            opacity: 1;
-
-            transform: translateY(0);
-        }
-
-
-        /* =========================
-           TIMELINE DOT
-        ========================= */
-
-        .timeline-dot {
-            position: absolute;
-
-            right: -9px;
-            top: 28px;
-
-            width: 18px;
-            height: 18px;
-
-            background: white;
-
-            border: 3px solid #cbd5e1;
-
-            border-radius: 50%;
-
-            z-index: 5;
-
-            transition: all 0.4s ease;
-        }
-
-
-        .timeline-item:nth-child(even) .timeline-dot {
-            left: -9px;
-            right: auto;
-        }
-
-
-        .timeline-item.active .timeline-dot {
-            background: #2563eb;
-
-            border-color: #2563eb;
-
-            box-shadow:
-                0 0 0 7px rgba(37, 99, 235, 0.12);
-        }
-
-
-        /* =========================
-           CARD
-        ========================= */
-
-        .timeline-card {
-            background: #0f172a;
-
-            color: white;
-
-            border-radius: 20px;
-
-            padding: 28px;
-
-            border: 1px solid #1e293b;
-
-            transition:
-                transform 0.3s ease,
-                box-shadow 0.3s ease;
-        }
-
-
-        .timeline-item.active .timeline-card {
-            box-shadow:
-                0 20px 50px rgba(15, 23, 42, 0.15);
-        }
-
-
-        .timeline-card:hover {
-            transform: translateY(-5px);
-        }
-
-
-        /* Year */
-
-        .timeline-year {
-            color: #60a5fa;
-
-            font-size: 14px;
-
-            font-weight: 800;
-
-            letter-spacing: 2px;
-
-            margin-bottom: 10px;
-        }
-
-
-        /* Title */
-
-        .timeline-title {
-            font-size: 25px;
-
-            font-weight: 700;
-
-            margin-bottom: 12px;
-        }
-
-
-        /* Description */
-
-        .timeline-description {
-            color: #94a3b8;
-
-            font-size: 15px;
-
-            line-height: 1.7;
-        }
-
-
-        /* Tags */
-
-        .timeline-tags {
-            display: flex;
-
-            flex-wrap: wrap;
-
-            gap: 8px;
-
-            margin-top: 20px;
-        }
-
-
-        .timeline-tag {
-            border: 1px solid #334155;
-
-            color: #cbd5e1;
-
-            border-radius: 999px;
-
-            padding: 7px 11px;
-
-            font-size: 12px;
-        }
-
-
-        /* =========================
-           END
-        ========================= */
-
-        .journey-end {
-            text-align: center;
-
-            margin-top: 30px;
-        }
-
-
-        .journey-end-box {
-            display: inline-block;
-
-            background: #0f172a;
-
-            color: white;
-
-            padding: 25px 35px;
-
-            border-radius: 18px;
-        }
-
-
-        .journey-end-box strong {
-            display: block;
-
-            font-size: 20px;
-
-            margin-bottom: 6px;
-        }
-
-
-        .journey-end-box span {
-            color: #94a3b8;
-
-            font-size: 14px;
-        }
-
-
-        /* =========================
-           MOBILE
-        ========================= */
-
-        @media (max-width: 700px) {
-
-            .timeline-line,
-            .timeline-progress {
-                left: 30px;
-            }
-
-
-            .avatar {
-                left: 30px;
-
-                width: 58px;
-                height: 58px;
-
-                font-size: 28px;
-            }
-
-
-            .timeline-item,
-            .timeline-item:nth-child(even) {
-
-                width: 100%;
-
-                margin-left: 0;
-
-                padding:
-                    20px
-                    20px
-                    60px
-                    75px;
-            }
-
-
-            .timeline-dot,
-            .timeline-item:nth-child(even) .timeline-dot {
-
-                left: 21px;
-
-                right: auto;
-            }
-
-
-            .timeline-card {
-                padding: 22px;
-            }
-
-
-            .timeline-title {
-                font-size: 21px;
-            }
-        }
-
-
-        /* =========================
-           REDUCED MOTION
-        ========================= */
-
-        @media (prefers-reduced-motion: reduce) {
-
-            .timeline-item,
-            .timeline-card,
-            .timeline-progress,
-            .avatar {
-                transition: none;
-            }
-
-        }
-
-    </style>
 </head>
 
 
 <body>
 
 
-    <!-- =========================
-         HEADER
-    ========================= -->
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-    <header class="journey-header">
+<header class="about-header">
 
-        <div class="journey-label">
-            About Me
+    <div class="eyebrow">
+        ABOUT ME
+    </div>
+
+    <h1>
+        My Journey
+    </h1>
+
+    <p>
+        A journey through computer science, research,
+        AI, and real-world experience.
+    </p>
+
+    <p>
+        Currently seeking volunteer opportunities in
+        Azure and Machine Learning.
+    </p>
+
+</header>
+
+
+
+<!-- =====================================================
+     TIMELINE
+===================================================== -->
+
+<main class="timeline-section">
+
+    <div class="timeline">
+
+
+        <!-- =================================================
+             MOVING MARKER
+        ================================================== -->
+
+        <div class="timeline-marker"
+             id="timelineMarker">
+
+            <span>✦</span>
+
         </div>
 
-        <h1>
-            Follow My Journey
-        </h1>
-
-        <p>
-            Scroll through the milestones that shaped my
-            education, experience and journey toward
-            technology and artificial intelligence.
-        </p>
-
-    </header>
 
 
+        <!-- =================================================
+             2012
+        ================================================== -->
 
-    <!-- =========================
-         TIMELINE
-    ========================= -->
+        <article class="timeline-item left">
 
-    <main>
-
-        <div class="timeline-wrapper" id="timeline">
-
-            <!-- Main line -->
-            <div class="timeline-line"></div>
-
-            <!-- Progress -->
-            <div
-                class="timeline-progress"
-                id="timelineProgress">
-            </div>
+            <div class="timeline-dot"></div>
 
 
-            <!-- Avatar -->
+            <div class="timeline-card">
 
-            <div
-                class="avatar"
-                id="avatar"
-                aria-label="Journey avatar">
-
-                👤
-
-            </div>
+                <div class="timeline-year">
+                    2012
+                </div>
 
 
-
-            <!-- =========================
-                 2015
-            ========================= -->
-
-            <article class="timeline-item active">
-
-                <span class="timeline-dot"></span>
-
-                <div class="timeline-card">
-
-                    <div class="timeline-year">
-                        2015
-                    </div>
-
-                    <div class="timeline-title">
-                        The Beginning
-                    </div>
-
-                    <div class="timeline-description">
-
-                        Started my journey in technology
-                        with a foundation in Computer Science
-                        and software.
-
-                    </div>
+                <h2>
+                    Bachelor's in Computer Science
+                </h2>
 
 
-                    <div class="timeline-tags">
+                <h3>
+                    Haryana, India
+                </h3>
 
-                        <span class="timeline-tag">
-                            Computer Science
-                        </span>
 
-                        <span class="timeline-tag">
-                            Technology
-                        </span>
+                <p>
+                    Started my academic journey in Computer
+                    Science, building a strong foundation in
+                    programming, data structures and software.
+                </p>
 
-                    </div>
+
+                <div class="achievement">
+
+                    <span class="achievement-value">
+                        7.26 CGPA
+                    </span>
 
                 </div>
 
-            </article>
 
-
-
-            <!-- =========================
-                 2022
-            ========================= -->
-
-            <article class="timeline-item">
-
-                <span class="timeline-dot"></span>
-
-                <div class="timeline-card">
-
-                    <div class="timeline-year">
-                        2022
-                    </div>
-
-                    <div class="timeline-title">
-                        Exploring AI
-                    </div>
-
-                    <div class="timeline-description">
-
-                        Started exploring Artificial
-                        Intelligence, Big Data and
-                        analytics while developing a
-                        deeper interest in intelligent systems.
-
-                    </div>
-
-
-                    <div class="timeline-tags">
-
-                        <span class="timeline-tag">
-                            Artificial Intelligence
-                        </span>
-
-                        <span class="timeline-tag">
-                            Big Data
-                        </span>
-
-                        <span class="timeline-tag">
-                            Analytics
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-
-            <!-- =========================
-                 2024
-            ========================= -->
-
-            <article class="timeline-item">
-
-                <span class="timeline-dot"></span>
-
-                <div class="timeline-card">
-
-                    <div class="timeline-year">
-                        2024
-                    </div>
-
-                    <div class="timeline-title">
-                        A New Chapter
-                    </div>
-
-                    <div class="timeline-description">
-
-                        Expanded my Canadian education
-                        and began connecting technology
-                        with new professional opportunities.
-
-                    </div>
-
-
-                    <div class="timeline-tags">
-
-                        <span class="timeline-tag">
-                            Education
-                        </span>
-
-                        <span class="timeline-tag">
-                            Canada
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-
-            <!-- =========================
-                 2025
-            ========================= -->
-
-            <article class="timeline-item">
-
-                <span class="timeline-dot"></span>
-
-                <div class="timeline-card">
-
-                    <div class="timeline-year">
-                        2025
-                    </div>
-
-                    <div class="timeline-title">
-                        Learning Through Experience
-                    </div>
-
-                    <div class="timeline-description">
-
-                        Built hands-on professional
-                        experience while developing
-                        discipline, problem-solving ability
-                        and practical skills outside
-                        the classroom.
-
-                    </div>
-
-
-                    <div class="timeline-tags">
-
-                        <span class="timeline-tag">
-                            Professional Experience
-                        </span>
-
-                        <span class="timeline-tag">
-                            Problem Solving
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-
-            <!-- =========================
-                 2026
-            ========================= -->
-
-            <article class="timeline-item">
-
-                <span class="timeline-dot"></span>
-
-                <div class="timeline-card">
-
-                    <div class="timeline-year">
-                        2026
-                    </div>
-
-                    <div class="timeline-title">
-                        Building Toward AI & ML
-                    </div>
-
-                    <div class="timeline-description">
-
-                        Combining my technology background,
-                        education and practical experience
-                        to build projects in AI, machine
-                        learning, software and cloud
-                        technologies.
-
-                    </div>
-
-
-                    <div class="timeline-tags">
-
-                        <span class="timeline-tag">
-                            AI
-                        </span>
-
-                        <span class="timeline-tag">
-                            Machine Learning
-                        </span>
-
-                        <span class="timeline-tag">
-                            Azure
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-
-            <!-- END -->
-
-            <div class="journey-end">
-
-                <div class="journey-end-box">
-
-                    <strong>
-                        And the journey continues...
-                    </strong>
+                <div class="tags">
 
                     <span>
-                        What's next is still being written.
+                        Computer Science
+                    </span>
+
+                    <span>
+                        Data Structures
+                    </span>
+
+                    <span>
+                        Software
                     </span>
 
                 </div>
 
             </div>
 
+        </article>
+
+
+
+        <!-- =================================================
+             2015
+        ================================================== -->
+
+        <article class="timeline-item right">
+
+            <div class="timeline-dot"></div>
+
+
+            <div class="timeline-card">
+
+                <div class="timeline-year">
+                    2015
+                </div>
+
+
+                <h2>
+                    Data Analyst
+                </h2>
+
+
+                <h3>
+                    Aspire Web Tech
+                </h3>
+
+
+                <p>
+                    Worked with data analysis, reporting,
+                    statistics and analytical problem solving.
+                </p>
+
+
+                <div class="tags">
+
+                    <span>
+                        Data Analysis
+                    </span>
+
+                    <span>
+                        Reporting
+                    </span>
+
+                    <span>
+                        Statistics
+                    </span>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =================================================
+             2017
+        ================================================== -->
+
+        <article class="timeline-item left">
+
+            <div class="timeline-dot"></div>
+
+
+            <div class="timeline-card">
+
+                <div class="timeline-year">
+                    2017
+                </div>
+
+
+                <h2>
+                    Master's in Computer Science
+                </h2>
+
+
+                <h3>
+                    Thapar Institute, India
+                </h3>
+
+
+                <p>
+                    Continued my postgraduate education and
+                    developed stronger interests in Artificial
+                    Intelligence and Machine Learning.
+                </p>
+
+
+                <div class="achievement">
+
+                    <span class="achievement-value">
+                        7.7 CGPA
+                    </span>
+
+                </div>
+
+
+                <div class="tags">
+
+                    <span>
+                        Artificial Intelligence
+                    </span>
+
+                    <span>
+                        Machine Learning
+                    </span>
+
+                    <span>
+                        Research
+                    </span>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =================================================
+             2019
+        ================================================== -->
+
+        <article class="timeline-item right">
+
+            <div class="timeline-dot"></div>
+
+
+            <div class="timeline-card">
+
+                <div class="timeline-year">
+                    2019
+                </div>
+
+
+                <h2>
+                    Researcher
+                </h2>
+
+
+                <h3>
+                    CSIR, India
+                </h3>
+
+
+                <p>
+                    Worked on research involving IoT,
+                    Machine Learning, statistics and
+                    time-series analysis.
+                </p>
+
+
+                <div class="tags">
+
+                    <span>
+                        IoT
+                    </span>
+
+                    <span>
+                        Machine Learning
+                    </span>
+
+                    <span>
+                        Statistics
+                    </span>
+
+                    <span>
+                        Time Series
+                    </span>
+
+                    <span>
+                        Agriculture
+                    </span>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =================================================
+             2022
+        ================================================== -->
+
+        <article class="timeline-item left">
+
+            <div class="timeline-dot"></div>
+
+
+            <div class="timeline-card">
+
+                <div class="timeline-year">
+                    2022
+                </div>
+
+
+                <h2>
+                    Artificial Intelligence &
+                    Big Data Analytics
+                </h2>
+
+
+                <h3>
+                    Georgian College, Canada
+                </h3>
+
+
+                <p>
+                    Completed the AIDI — Artificial Intelligence,
+                    Architecture, Design, and Implementation
+                    program with Honors, while developing
+                    practical skills in Machine Learning and
+                    Big Data Analytics.
+                </p>
+
+
+                <p class="additional-skills">
+
+                    Built additional skills in data analysis,
+                    visualization and business intelligence
+                    using Excel and Power BI.
+
+                </p>
+
+
+                <div class="achievement-row">
+
+                    <div class="achievement">
+
+                        <span class="achievement-value">
+                            Honors
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="tags">
+
+                    <span>
+                        AIDI
+                    </span>
+
+                    <span>
+                        Artificial Intelligence
+                    </span>
+
+                    <span>
+                        Machine Learning
+                    </span>
+
+                    <span>
+                        Big Data
+                    </span>
+
+                    <span>
+                        Excel
+                    </span>
+
+                    <span>
+                        Power BI
+                    </span>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =================================================
+             2026
+        ================================================== -->
+
+        <article class="timeline-item right current">
+
+            <div class="timeline-dot"></div>
+
+
+            <div class="timeline-card">
+
+                <div class="timeline-year">
+                    2026 →
+                </div>
+
+
+                <h2>
+                    Seeking Volunteer Opportunities
+                </h2>
+
+
+                <h3>
+                    Azure • Machine Learning • Python • AI
+                </h3>
+
+
+                <p>
+                    Currently seeking volunteer opportunities
+                    where I can contribute my skills in Azure,
+                    Machine Learning, Python and Artificial
+                    Intelligence while gaining practical
+                    experience and giving back to the community.
+                </p>
+
+
+                <div class="tags">
+
+                    <span>
+                        Azure
+                    </span>
+
+                    <span>
+                        Machine Learning
+                    </span>
+
+                    <span>
+                        Python
+                    </span>
+
+                    <span>
+                        Artificial Intelligence
+                    </span>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =================================================
+             JOURNEY CONTINUES
+        ================================================== -->
+
+        <div class="journey-continues">
+
+            <div class="journey-line"></div>
+
+
+            <div class="journey-icon">
+                ✦
+            </div>
+
+
+            <h2>
+                And the journey continues...
+            </h2>
+
+
+            <p>
+                What's next is still being written.
+            </p>
+
         </div>
 
-    </main>
+
+    </div>
+
+</main>
 
 
 
-    <!-- =========================
-         JAVASCRIPT
-    ========================= -->
+<!-- =====================================================
+     SCROLL INDICATOR
+===================================================== -->
 
-    <script>
+<div class="scroll-indicator">
 
-        const timeline =
-            document.getElementById("timeline");
+    <div class="scroll-title">
 
-        const avatar =
-            document.getElementById("avatar");
+        Scroll
+        <br>
+        Down
 
-        const progress =
-            document.getElementById("timelineProgress");
-
-        const items =
-            document.querySelectorAll(".timeline-item");
+    </div>
 
 
-        function updateJourney() {
+    <div class="scroll-arrow">
+        ↓
+    </div>
 
-            const rect =
-                timeline.getBoundingClientRect();
-
-
-            /*
-                Position where the avatar should be.
-
-                38% of the viewport gives the
-                feeling that the avatar follows
-                the visitor's reading position.
-            */
-
-            let avatarPosition =
-                window.innerHeight * 0.38 - rect.top;
+</div>
 
 
-            /*
-                Keep avatar inside timeline
-            */
 
-            avatarPosition =
-                Math.max(
-                    0,
-                    Math.min(
-                        rect.height,
-                        avatarPosition
-                    )
-                );
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
 
+<script src="{% static 'main/js/about.js' %}"></script>
 
-            /*
-                Move avatar
-            */
-
-            avatar.style.top =
-                avatarPosition + "px";
-
-
-            /*
-                Calculate progress percentage
-            */
-
-            const percentage =
-                (avatarPosition / rect.height) * 100;
-
-
-            progress.style.height =
-                percentage + "%";
-
-
-            /*
-                Find closest milestone
-            */
-
-            let closestIndex = 0;
-
-            let closestDistance =
-                Infinity;
-
-
-            items.forEach(
-                (item, index) => {
-
-                    const itemPosition =
-                        item.offsetTop +
-                        item.offsetHeight * 0.35;
-
-
-                    const distance =
-                        Math.abs(
-                            avatarPosition -
-                            itemPosition
-                        );
-
-
-                    if (
-                        distance <
-                        closestDistance
-                    ) {
-
-                        closestDistance =
-                            distance;
-
-                        closestIndex =
-                            index;
-
-                    }
-
-                }
-            );
-
-
-            /*
-                Activate current milestone
-            */
-
-            items.forEach(
-                (item, index) => {
-
-                    if (
-                        index ===
-                        closestIndex
-                    ) {
-
-                        item.classList.add(
-                            "active"
-                        );
-
-                    } else {
-
-                        item.classList.remove(
-                            "active"
-                        );
-
-                    }
-
-                }
-            );
-
-        }
-
-
-        /*
-            Listen for scrolling
-        */
-
-        window.addEventListener(
-            "scroll",
-            updateJourney,
-            { passive: true }
-        );
-
-
-        /*
-            Handle browser resize
-        */
-
-        window.addEventListener(
-            "resize",
-            updateJourney
-        );
-
-
-        /*
-            Initial position
-        */
-
-        updateJourney();
-
-    </script>
 
 </body>
+
+</main>
+
+
+<!-- HOME BUTTON -->
+
+<a href="{% url 'home' %}"
+   class="bottom-home"
+   aria-label="Back to Home">
+
+    <span>⌂</span>
+
+</a>
+
+
+<!-- SCROLL INDICATOR -->
+
+<div class="scroll-indicator">
+
+    <div class="scroll-title">
+        Scroll<br>Down
+    </div>
+
+    <div class="scroll-arrow">
+        ↓
+    </div>
+
+</div>
+
+
+<script src="{% static 'main/js/about.js' %}"></script>
+
+</body>
+</html>
 </html>

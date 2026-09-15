@@ -1,0 +1,1134 @@
+/* =====================================================
+   GLOBAL
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+
+    overflow-x: hidden;
+}
+
+
+body {
+
+    margin: 0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #ffffff;
+
+    color: #111827;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.about-header {
+
+    text-align: center;
+
+    padding:
+        60px
+        20px
+        45px;
+}
+
+
+.eyebrow {
+
+    color: #1264e8;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    letter-spacing: 6px;
+
+    margin-bottom: 8px;
+}
+
+
+.about-header h1 {
+
+    margin: 0;
+
+    font-size: 52px;
+
+    font-weight: 800;
+
+    color: #101827;
+}
+
+
+.about-header p {
+
+    max-width: 850px;
+
+    margin:
+        10px
+        auto
+        0;
+
+    color: #53657d;
+
+    font-size: 17px;
+
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   TIMELINE SECTION
+===================================================== */
+
+.timeline-section {
+
+    width: 100%;
+
+    max-width: 100%;
+
+    padding:
+        20px
+        30px
+        100px;
+
+    overflow: hidden;
+}
+
+
+.timeline {
+
+    position: relative;
+
+    width: 100%;
+
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    padding:
+        20px
+        0
+        80px;
+}
+
+
+/* =====================================================
+   MAIN BLUE/GRAY LINE
+===================================================== */
+
+.timeline::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    bottom: 0;
+
+    left: 50%;
+
+    width: 4px;
+
+    background: #dce5ef;
+
+    transform:
+        translateX(-50%);
+
+    z-index: 1;
+}
+
+
+/* =====================================================
+   MOVING BLUE MARKER
+===================================================== */
+
+.timeline-marker {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 0;
+
+    width: 64px;
+
+    height: 64px;
+
+    background: #07101f;
+
+    border:
+        6px solid
+        #1473ff;
+
+    border-radius: 50%;
+
+    transform:
+        translate(-50%, 0);
+
+    z-index: 20;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    box-shadow:
+
+        0 0 0 8px
+        rgba(20, 115, 255, 0.12),
+
+        0 0 30px
+        rgba(20, 115, 255, 0.35);
+
+    transition:
+        top 0.25s ease-out;
+}
+
+
+.timeline-marker span {
+
+    display: block;
+
+    color: white;
+
+    font-size: 27px;
+}
+
+
+/* =====================================================
+   TIMELINE ITEMS
+===================================================== */
+
+.timeline-item {
+
+    position: relative;
+
+    width: 100%;
+
+    min-height: 210px;
+
+    margin-bottom: 45px;
+
+    opacity: 1;
+
+    z-index: 2;
+}
+
+
+/* =====================================================
+   TIMELINE DOTS
+===================================================== */
+
+.timeline-dot {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 50%;
+
+    width: 18px;
+
+    height: 18px;
+
+    background: #1473ff;
+
+    border:
+        4px solid
+        white;
+
+    border-radius: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    z-index: 10;
+
+    box-shadow:
+
+        0 0 0 6px
+        rgba(20, 115, 255, 0.10);
+}
+
+
+/* =====================================================
+   DARK TIMELINE CARDS
+===================================================== */
+
+.timeline-card {
+
+    position: relative;
+
+    width:
+        calc(50% - 65px);
+
+    max-width: 540px;
+
+    padding:
+        28px
+        32px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #07101f 0%,
+            #0c182b 100%
+        );
+
+    color: white;
+
+    border:
+        2px solid
+        #172943;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 15px 35px
+        rgba(4, 15, 30, 0.12);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/* LEFT */
+
+.timeline-item.left
+.timeline-card {
+
+    margin-right: auto;
+}
+
+
+/* RIGHT */
+
+.timeline-item.right
+.timeline-card {
+
+    margin-left: auto;
+}
+
+
+/* =====================================================
+   CONNECTOR LINES
+===================================================== */
+
+.timeline-item.left
+.timeline-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    right: -65px;
+
+    top: 50%;
+
+    width: 65px;
+
+    height: 2px;
+
+    background: #1473ff;
+
+    transform:
+        translateY(-50%);
+}
+
+
+.timeline-item.right
+.timeline-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: -65px;
+
+    top: 50%;
+
+    width: 65px;
+
+    height: 2px;
+
+    background: #1473ff;
+
+    transform:
+        translateY(-50%);
+}
+
+
+/* =====================================================
+   ACTIVE CARD
+===================================================== */
+
+.timeline-item.active
+.timeline-card {
+
+    border-color: #1473ff;
+
+    box-shadow:
+
+        0 0 0 1px
+        #1473ff,
+
+        0 18px 45px
+        rgba(20, 115, 255, 0.20);
+}
+
+
+/* =====================================================
+   YEAR
+===================================================== */
+
+.timeline-year {
+
+    color: #2196ff;
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    letter-spacing: 5px;
+
+    margin-bottom: 8px;
+}
+
+
+/* =====================================================
+   CARD HEADINGS
+===================================================== */
+
+.timeline-card h2 {
+
+    margin:
+        0
+        0
+        7px;
+
+    color: #ffffff;
+
+    font-size: 24px;
+
+    line-height: 1.25;
+
+    overflow-wrap: break-word;
+}
+
+
+.timeline-card h3 {
+
+    margin:
+        0
+        0
+        12px;
+
+    color: #f1f5f9;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    overflow-wrap: break-word;
+}
+
+
+/* =====================================================
+   CARD TEXT
+===================================================== */
+
+.timeline-card p {
+
+    margin: 0;
+
+    color: #cbd5e1;
+
+    font-size: 15px;
+
+    line-height: 1.65;
+
+    overflow-wrap: break-word;
+
+    word-wrap: break-word;
+}
+
+
+.additional-skills {
+
+    margin-top: 12px !important;
+}
+
+
+/* =====================================================
+   BLUE ACHIEVEMENT BADGES
+===================================================== */
+
+.achievement-row {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 15px;
+}
+
+
+.achievement {
+
+    display: inline-flex;
+
+    align-items: center;
+}
+
+
+.achievement-value {
+
+    display: inline-block;
+
+    padding:
+        7px
+        14px;
+
+    color: #ffffff;
+
+    background: #1473ff;
+
+    border:
+        1px solid
+        #3392ff;
+
+    border-radius: 20px;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 5px 15px
+        rgba(20, 115, 255, 0.25);
+}
+
+
+/* =====================================================
+   TAGS
+===================================================== */
+
+.tags {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 16px;
+}
+
+
+.tags span {
+
+    display: inline-block;
+
+    padding:
+        6px
+        11px;
+
+    color: #dbeafe;
+
+    background:
+        rgba(20, 115, 255, 0.05);
+
+    border:
+        1px solid
+        #1b5798;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   HOVER
+===================================================== */
+
+.timeline-card:hover {
+
+    transform:
+        translateY(-4px);
+
+    border-color: #1473ff;
+
+    box-shadow:
+
+        0 20px 45px
+        rgba(20, 115, 255, 0.20);
+}
+
+
+/* =====================================================
+   2026
+===================================================== */
+
+.timeline-item.current
+.timeline-card {
+
+    border-color: #1473ff;
+}
+
+
+/* =====================================================
+   JOURNEY CONTINUES
+===================================================== */
+
+.journey-continues {
+
+    position: relative;
+
+    text-align: center;
+
+    margin-top: 70px;
+
+    padding:
+        50px
+        20px
+        80px;
+
+    z-index: 3;
+}
+
+
+.journey-line {
+
+    width: 3px;
+
+    height: 55px;
+
+    margin:
+        0
+        auto
+        20px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            #1473ff,
+            #dce5ef
+        );
+}
+
+
+.journey-icon {
+
+    width: 52px;
+
+    height: 52px;
+
+    margin:
+        0
+        auto
+        20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #07101f;
+
+    border:
+        4px solid
+        #1473ff;
+
+    border-radius: 50%;
+
+    color: white;
+
+    font-size: 22px;
+
+    box-shadow:
+
+        0 0 0 7px
+        rgba(20, 115, 255, 0.10),
+
+        0 0 25px
+        rgba(20, 115, 255, 0.25);
+}
+
+
+.journey-continues h2 {
+
+    margin:
+        0
+        0
+        10px;
+
+    color: #101827;
+
+    font-size: 28px;
+
+    font-weight: 800;
+}
+
+
+.journey-continues p {
+
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 16px;
+
+    font-style: italic;
+}
+
+
+/* =====================================================
+   HOME BUTTON — TOP RIGHT
+===================================================== */
+
+.bottom-home {
+
+    position: fixed;
+
+    top: 25px;
+
+    right: 30px;
+
+    width: 58px;
+
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #07101f;
+
+    border:
+        2px solid
+        #1473ff;
+
+    border-radius: 50%;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 32px;
+
+    z-index: 1000;
+
+    box-shadow:
+
+        0 8px 25px
+        rgba(20, 115, 255, 0.25);
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+/* =====================================================
+   REVOLVING WHITE LIGHT
+===================================================== */
+
+.bottom-home::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -4px;
+
+    border-radius: 50%;
+
+    padding: 3px;
+
+    background:
+        conic-gradient(
+            from 0deg,
+
+            transparent 0deg,
+
+            transparent 250deg,
+
+            rgba(255, 255, 255, 0.10) 270deg,
+
+            rgba(255, 255, 255, 0.45) 285deg,
+
+            #ffffff 300deg,
+
+            #ffffff 320deg,
+
+            rgba(255, 255, 255, 0.45) 335deg,
+
+            transparent 350deg,
+
+            transparent 360deg
+        );
+
+    animation:
+        homeLight 2.2s linear infinite;
+
+    z-index: -1;
+
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+
+    -webkit-mask-composite: xor;
+
+    mask-composite: exclude;
+
+}
+
+
+/* =====================================================
+   LIGHT GLOW
+===================================================== */
+
+.bottom-home::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -6px;
+
+    border-radius: 50%;
+
+    background: transparent;
+
+    box-shadow:
+        0 0 10px
+        rgba(255, 255, 255, 0.40);
+
+    pointer-events: none;
+
+    z-index: -2;
+}
+
+
+/* =====================================================
+   ROTATION ANIMATION
+===================================================== */
+
+@keyframes homeLight {
+
+    from {
+
+        transform:
+            rotate(0deg);
+
+    }
+
+    to {
+
+        transform:
+            rotate(360deg);
+
+    }
+
+}
+
+
+/* =====================================================
+   HOME HOVER
+===================================================== */
+
+.bottom-home:hover {
+
+    transform:
+        scale(1.08);
+
+    background: #1473ff;
+
+    box-shadow:
+
+        0 12px 30px
+        rgba(20, 115, 255, 0.40);
+}
+
+
+/* =====================================================
+   SCROLL INDICATOR
+===================================================== */
+
+.scroll-indicator {
+
+    position: fixed;
+
+    right: 25px;
+
+    top: 45%;
+
+    text-align: center;
+
+    color: #1264e8;
+
+    font-weight: 800;
+
+    z-index: 30;
+}
+
+
+.scroll-title {
+
+    font-size: 18px;
+
+    line-height: 1.2;
+}
+
+
+.scroll-arrow {
+
+    margin-top: 10px;
+
+    font-size: 42px;
+
+    line-height: 1;
+
+    color: #1473ff;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1100px) {
+
+    .timeline-section {
+
+        padding-left: 20px;
+
+        padding-right: 20px;
+    }
+
+
+    .timeline-card {
+
+        width:
+            calc(50% - 55px);
+
+        max-width: 480px;
+    }
+
+
+    .timeline-item.left
+    .timeline-card::after {
+
+        right: -55px;
+
+        width: 55px;
+    }
+
+
+    .timeline-item.right
+    .timeline-card::after {
+
+        left: -55px;
+
+        width: 55px;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .about-header {
+
+        padding:
+            45px
+            20px
+            30px;
+    }
+
+
+    .about-header h1 {
+
+        font-size: 40px;
+    }
+
+
+    .timeline-section {
+
+        padding:
+            20px
+            20px
+            80px;
+    }
+
+
+    .timeline {
+
+        padding-left: 35px;
+    }
+
+
+    /* MOBILE LINE */
+
+    .timeline::before {
+
+        left: 17px;
+
+        transform: none;
+    }
+
+
+    /* MOBILE MOVING MARKER */
+
+    .timeline-marker {
+
+        left: 17px;
+
+        width: 48px;
+
+        height: 48px;
+
+        border-width: 5px;
+
+        transform:
+            translate(-50%, 0);
+    }
+
+
+    .timeline-marker span {
+
+        font-size: 20px;
+    }
+
+
+    /* MOBILE ITEM */
+
+    .timeline-item {
+
+        min-height: auto;
+
+        margin-bottom: 30px;
+    }
+
+
+    /* MOBILE DOT */
+
+    .timeline-dot {
+
+        left: 17px;
+
+        top: 35px;
+    }
+
+
+    /* MOBILE CARD */
+
+    .timeline-card,
+
+    .timeline-item.left
+    .timeline-card,
+
+    .timeline-item.right
+    .timeline-card {
+
+        width: 100%;
+
+        max-width: none;
+
+        margin-left: 35px;
+
+        margin-right: 0;
+
+        padding: 23px;
+    }
+
+
+    /* REMOVE CONNECTORS */
+
+    .timeline-item.left
+    .timeline-card::after,
+
+    .timeline-item.right
+    .timeline-card::after {
+
+        display: none;
+    }
+
+
+    .timeline-card h2 {
+
+        font-size: 21px;
+    }
+
+
+    /* HOME BUTTON MOBILE */
+
+    .bottom-home {
+
+        top: 18px;
+
+        right: 20px;
+
+        width: 52px;
+
+        height: 52px;
+
+        font-size: 29px;
+    }
+
+
+    /* HIDE SCROLL INDICATOR */
+
+    .scroll-indicator {
+
+        display: none;
+    }
+
+
+    .journey-continues {
+
+        padding-bottom: 50px;
+    }
+
+
+    .journey-continues h2 {
+
+        font-size: 23px;
+    }
+
+}

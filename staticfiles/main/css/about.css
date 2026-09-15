@@ -1,0 +1,761 @@
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   BODY
+===================================================== */
+
+body {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #ffffff;
+
+    color: #0f172a;
+
+    overflow-x: hidden;
+}
+
+
+/* =====================================================
+   ABOUT HEADER
+===================================================== */
+
+.about-header {
+
+    text-align: center;
+
+    padding:
+        100px
+        20px
+        70px;
+}
+
+
+.about-label {
+
+    color: #2563eb;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 18px;
+
+    text-transform: uppercase;
+}
+
+
+.about-header h1 {
+
+    font-size:
+        clamp(48px, 7vw, 78px);
+
+    line-height: 1;
+
+    letter-spacing: -3px;
+
+    margin-bottom: 25px;
+}
+
+
+.about-header p {
+
+    max-width: 680px;
+
+    margin: auto;
+
+    color: #64748b;
+
+    font-size: 17px;
+
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   JOURNEY
+===================================================== */
+
+.journey {
+
+    width: 100%;
+}
+
+
+/* =====================================================
+   TIMELINE
+===================================================== */
+
+.timeline {
+
+    position: relative;
+
+    width:
+        min(1100px, 92%);
+
+    margin: auto;
+
+    padding:
+        50px
+        0
+        130px;
+}
+
+
+/* =====================================================
+   MAIN TIMELINE LINE
+===================================================== */
+
+.timeline-line {
+
+    position: absolute;
+
+    top: 0;
+
+    bottom: 80px;
+
+    left: 50%;
+
+    width: 3px;
+
+    background: #dbe3ef;
+
+    transform:
+        translateX(-50%);
+
+    border-radius: 20px;
+}
+
+
+/* =====================================================
+   BLUE PROGRESS
+===================================================== */
+
+.timeline-progress {
+
+    position: absolute;
+
+    top: 0;
+
+    left: 50%;
+
+    width: 4px;
+
+    height: 0;
+
+    background: #2563eb;
+
+    transform:
+        translateX(-50%);
+
+    border-radius: 20px;
+
+    z-index: 2;
+
+    transition:
+        height 0.08s linear;
+}
+
+
+/* =====================================================
+   MOVING JOURNEY MARKER
+===================================================== */
+
+.journey-marker {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 0;
+
+    width: 70px;
+
+    height: 70px;
+
+    transform:
+        translate(-50%, -50%);
+
+    background: #0f172a;
+
+    border: 4px solid #2563eb;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #ffffff;
+
+    font-size: 30px;
+
+    z-index: 10;
+
+    box-shadow:
+
+        0 0 0 8px
+        rgba(37, 99, 235, 0.10),
+
+        0 15px 35px
+        rgba(15, 23, 42, 0.20);
+
+    transition:
+        top 0.08s linear;
+}
+
+
+.journey-marker span {
+
+    animation:
+        markerPulse 1.8s
+        ease-in-out
+        infinite;
+}
+
+
+@keyframes markerPulse {
+
+    0%,
+    100% {
+
+        transform: scale(1);
+
+    }
+
+    50% {
+
+        transform: scale(1.2);
+
+    }
+}
+
+
+/* =====================================================
+   TIMELINE ITEM
+===================================================== */
+
+.timeline-item {
+
+    position: relative;
+
+    width: 50%;
+
+    min-height: 310px;
+
+    padding:
+        20px
+        65px
+        80px
+        0;
+
+    opacity: 0.28;
+
+    transform:
+        translateY(25px);
+
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
+}
+
+
+/* Right side */
+
+.timeline-item:nth-child(even) {
+
+    margin-left: 50%;
+
+    padding:
+        20px
+        0
+        80px
+        65px;
+}
+
+
+/* Active */
+
+.timeline-item.active {
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+
+/* =====================================================
+   TIMELINE DOT
+===================================================== */
+
+.timeline-dot {
+
+    position: absolute;
+
+    right: -9px;
+
+    top: 32px;
+
+    width: 18px;
+
+    height: 18px;
+
+    background: #ffffff;
+
+    border:
+        3px solid
+        #cbd5e1;
+
+    border-radius: 50%;
+
+    z-index: 5;
+
+    transition:
+        all 0.4s ease;
+}
+
+
+.timeline-item:nth-child(even)
+.timeline-dot {
+
+    left: -9px;
+
+    right: auto;
+}
+
+
+/* Active dot */
+
+.timeline-item.active
+.timeline-dot {
+
+    background: #2563eb;
+
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 7px
+        rgba(37, 99, 235, 0.12);
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.timeline-card {
+
+    position: relative;
+
+    background: #0f172a;
+
+    color: #ffffff;
+
+    padding: 32px;
+
+    border-radius: 22px;
+
+    border:
+        1px solid
+        #1e293b;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+
+/* Blue top line */
+
+.timeline-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 3px;
+
+    background: #2563eb;
+
+    transform:
+        scaleX(0);
+
+    transform-origin:
+        left;
+
+    transition:
+        transform 0.4s ease;
+}
+
+
+.timeline-item.active
+.timeline-card::before {
+
+    transform:
+        scaleX(1);
+}
+
+
+/* Hover */
+
+.timeline-card:hover {
+
+    transform:
+        translateY(-6px);
+
+    box-shadow:
+        0 25px 55px
+        rgba(15, 23, 42, 0.18);
+}
+
+
+/* =====================================================
+   YEAR
+===================================================== */
+
+.timeline-year {
+
+    color: #60a5fa;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 12px;
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.timeline-card h2 {
+
+    font-size: 27px;
+
+    line-height: 1.2;
+
+    margin-bottom: 8px;
+}
+
+
+/* =====================================================
+   SUBTITLE
+===================================================== */
+
+.timeline-card h3 {
+
+    color: #cbd5e1;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    margin-bottom: 18px;
+}
+
+
+/* =====================================================
+   DESCRIPTION
+===================================================== */
+
+.timeline-card p {
+
+    color: #94a3b8;
+
+    font-size: 15px;
+
+    line-height: 1.75;
+}
+
+
+/* =====================================================
+   CGPA
+===================================================== */
+
+.cgpa {
+
+    display: inline-block;
+
+    margin-top: 18px;
+
+    padding:
+        7px
+        12px;
+
+    border:
+        1px solid
+        #334155;
+
+    border-radius: 999px;
+
+    color: #93c5fd;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   TAGS
+===================================================== */
+
+.tags {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 20px;
+}
+
+
+.tags span {
+
+    padding:
+        7px
+        11px;
+
+    border:
+        1px solid
+        #334155;
+
+    border-radius: 999px;
+
+    color: #cbd5e1;
+
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   END CARD
+===================================================== */
+
+.journey-end {
+
+    text-align: center;
+
+    margin-top: 20px;
+
+    position: relative;
+
+    z-index: 5;
+}
+
+
+.journey-end-card {
+
+    display: inline-block;
+
+    background: #0f172a;
+
+    color: #ffffff;
+
+    padding:
+        30px
+        40px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 20px 45px
+        rgba(15, 23, 42, 0.15);
+}
+
+
+.end-icon {
+
+    color: #60a5fa;
+
+    font-size: 25px;
+
+    margin-bottom: 10px;
+}
+
+
+.journey-end-card h2 {
+
+    font-size: 21px;
+
+    margin-bottom: 8px;
+}
+
+
+.journey-end-card p {
+
+    color: #94a3b8;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .about-header {
+
+        padding:
+            70px
+            20px
+            45px;
+    }
+
+
+    .about-header h1 {
+
+        font-size: 48px;
+
+        letter-spacing: -2px;
+    }
+
+
+    .about-header p {
+
+        font-size: 15px;
+    }
+
+
+    .timeline {
+
+        width: 94%;
+
+        padding-top: 45px;
+    }
+
+
+    /* Move line to left */
+
+    .timeline-line,
+    .timeline-progress {
+
+        left: 30px;
+    }
+
+
+    .journey-marker {
+
+        left: 30px;
+
+        width: 58px;
+
+        height: 58px;
+
+        font-size: 25px;
+    }
+
+
+    /* All cards become one column */
+
+    .timeline-item,
+    .timeline-item:nth-child(even) {
+
+        width: 100%;
+
+        margin-left: 0;
+
+        padding:
+            20px
+            15px
+            60px
+            75px;
+    }
+
+
+    .timeline-dot,
+    .timeline-item:nth-child(even)
+    .timeline-dot {
+
+        left: 21px;
+
+        right: auto;
+    }
+
+
+    .timeline-card {
+
+        padding: 24px;
+
+        border-radius: 18px;
+    }
+
+
+    .timeline-card h2 {
+
+        font-size: 22px;
+    }
+
+
+    .timeline-card p {
+
+        font-size: 14px;
+    }
+
+
+    .journey-end-card {
+
+        max-width: 90%;
+
+        padding:
+            25px;
+    }
+
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media
+(prefers-reduced-motion: reduce) {
+
+    .timeline-item,
+    .timeline-card,
+    .timeline-progress,
+    .journey-marker {
+
+        transition: none;
+    }
+
+    .journey-marker span {
+
+        animation: none;
+    }
+}

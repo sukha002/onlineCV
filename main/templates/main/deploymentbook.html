@@ -1,0 +1,1199 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Django Portfolio Deployment Handbook</title>
+
+    <meta name="description"
+          content="Django Portfolio Deployment Handbook - Local Django to GitHub, Azure App Service and Custom Domain">
+
+    <link rel="stylesheet"
+          href="{% static 'main/css/deplymentbookstle.css' %}">
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HERO
+     ===================================================== -->
+
+<header class="hero">
+
+    <div class="hero-content">
+
+        <p class="eyebrow">
+            DEPLOYMENT HANDBOOK
+        </p>
+
+        <h1>
+            Django Portfolio<br>
+            Deployment Handbook
+        </h1>
+
+        <p class="subtitle">
+            Local Django → GitHub → Azure App Service → Custom Domain
+        </p>
+
+        <p class="description">
+            A practical step-by-step record of deploying a Django
+            portfolio application from a local development environment
+            to production.
+        </p>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     PAGE LAYOUT
+     ===================================================== -->
+
+<div class="page-layout">
+
+
+    <!-- =================================================
+         SIDEBAR
+         ================================================= -->
+
+    <aside class="sidebar">
+
+        <h3>
+            Contents
+        </h3>
+
+        <a href="#project">
+            01 · Project Preparation
+        </a>
+
+        <a href="#github">
+            02 · GitHub Repository
+        </a>
+
+        <a href="#git-sync">
+            03 · Git Synchronization
+        </a>
+
+        <a href="#django">
+            04 · Preparing Django
+        </a>
+
+        <a href="#static">
+            05 · Static Files & WhiteNoise
+        </a>
+
+        <a href="#azure">
+            06 · Azure App Service
+        </a>
+
+        <a href="#github-azure">
+            07 · GitHub → Azure
+        </a>
+
+        <a href="#gunicorn">
+            08 · Gunicorn
+        </a>
+
+        <a href="#testing">
+            09 · Testing & Troubleshooting
+        </a>
+
+        <a href="#domain">
+            10 · Custom Domain & HTTPS
+        </a>
+
+        <a href="#workflow">
+            11 · Final Workflow
+        </a>
+
+        <a href="#checklist">
+            12 · Deployment Checklist
+        </a>
+
+    </aside>
+
+
+
+    <!-- =================================================
+         MAIN CONTENT
+         ================================================= -->
+
+    <main class="content">
+
+
+
+        <!-- =============================================
+             01
+             ============================================= -->
+
+        <section id="project">
+
+            <span class="section-number">
+                01
+            </span>
+
+            <h2>
+                Project Preparation
+            </h2>
+
+            <p>
+                Build and test the Django portfolio locally before
+                beginning the deployment process.
+            </p>
+
+            <h3>
+                Project Structure
+            </h3>
+
+            <pre><code>onlineCV/
+│
+├── onlineCV/
+│
+├── main/
+│
+├── manage.py
+│
+└── requirements.txt</code></pre>
+
+            <ul>
+
+                <li>
+                    Django project:
+                    <strong>onlineCV</strong>
+                </li>
+
+                <li>
+                    Main application:
+                    <strong>main</strong>
+                </li>
+
+                <li>
+                    Templates:
+                    <code>main/templates/main/</code>
+                </li>
+
+                <li>
+                    CSS:
+                    <code>main/static/main/css/</code>
+                </li>
+
+                <li>
+                    JavaScript:
+                    <code>main/static/main/js/</code>
+                </li>
+
+                <li>
+                    Homepage:
+                    <code>/</code>
+                </li>
+
+                <li>
+                    About page:
+                    <code>/about/</code>
+                </li>
+
+            </ul>
+
+        </section>
+
+
+
+        <!-- =============================================
+             02
+             ============================================= -->
+
+        <section id="github">
+
+            <span class="section-number">
+                02
+            </span>
+
+            <h2>
+                GitHub Repository
+            </h2>
+
+            <p>
+                GitHub acts as the source repository for the
+                Azure deployment.
+            </p>
+
+            <div class="info-box">
+
+                <strong>
+                    Repository
+                </strong>
+
+                <code>
+                    sukha002/onlineCV
+                </code>
+
+            </div>
+
+            <h3>
+                Deployment Branch
+            </h3>
+
+            <p>
+                The deployment workflow uses the
+                <strong>main</strong> branch.
+            </p>
+
+            <ul>
+
+                <li>
+                    Django project
+                </li>
+
+                <li>
+                    Application code
+                </li>
+
+                <li>
+                    Templates
+                </li>
+
+                <li>
+                    CSS and JavaScript
+                </li>
+
+                <li>
+                    requirements.txt
+                </li>
+
+                <li>
+                    Azure deployment configuration
+                </li>
+
+            </ul>
+
+        </section>
+
+
+
+        <!-- =============================================
+             03
+             ============================================= -->
+
+        <section id="git-sync">
+
+            <span class="section-number">
+                03
+            </span>
+
+            <h2>
+                Resolving Git Synchronization
+            </h2>
+
+            <p>
+                If Git rejects a push with a
+                <strong>non-fast-forward</strong> error,
+                the remote repository contains commits that
+                are not present in the local repository.
+            </p>
+
+            <h3>
+                Pull Remote Changes
+            </h3>
+
+            <pre><code>git pull origin main --no-rebase</code></pre>
+
+            <p>
+                If Git reports conflicts, resolve them before
+                committing the changes.
+            </p>
+
+            <h3>
+                Push Again
+            </h3>
+
+            <pre><code>git push origin main</code></pre>
+
+            <div class="warning">
+
+                <strong>
+                    Important:
+                </strong>
+
+                Do not use
+                <code>git push --force</code>
+                for this deployment workflow.
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =============================================
+             04
+             ============================================= -->
+
+        <section id="django">
+
+            <span class="section-number">
+                04
+            </span>
+
+            <h2>
+                Preparing Django for Azure
+            </h2>
+
+            <p>
+                Azure requires a production WSGI server to run
+                the Django application.
+            </p>
+
+            <h3>
+                Install Gunicorn
+            </h3>
+
+            <pre><code>pip install gunicorn</code></pre>
+
+            <p>
+                Make sure Gunicorn is included in
+                <code>requirements.txt</code>.
+            </p>
+
+            <div class="info-box">
+
+                <strong>
+                    Django WSGI Module
+                </strong>
+
+                <code>
+                    onlineCV.wsgi
+                </code>
+
+            </div>
+
+            <h3>
+                Verify Django
+            </h3>
+
+            <pre><code>python manage.py check</code></pre>
+
+        </section>
+
+
+
+        <!-- =============================================
+             05
+             ============================================= -->
+
+        <section id="static">
+
+            <span class="section-number">
+                05
+            </span>
+
+            <h2>
+                Static Files and WhiteNoise
+            </h2>
+
+            <p>
+                During deployment, the Django HTML may load while
+                CSS and JavaScript return 404 errors.
+            </p>
+
+            <p>
+                This normally means Django's static files have
+                not been configured or collected correctly.
+            </p>
+
+            <h3>
+                STATIC_URL
+            </h3>
+
+            <pre><code>STATIC_URL = '/static/'</code></pre>
+
+            <h3>
+                STATIC_ROOT
+            </h3>
+
+            <pre><code>STATIC_ROOT = BASE_DIR / 'staticfiles'</code></pre>
+
+            <h3>
+                Install WhiteNoise
+            </h3>
+
+            <pre><code>pip install whitenoise</code></pre>
+
+            <p>
+                Add WhiteNoise to
+                <code>requirements.txt</code>.
+            </p>
+
+            <h3>
+                WhiteNoise Middleware
+            </h3>
+
+            <pre><code>whitenoise.middleware.WhiteNoiseMiddleware</code></pre>
+
+            <p>
+                WhiteNoise should be placed immediately after
+                Django's SecurityMiddleware.
+            </p>
+
+            <h3>
+                Collect Static Files
+            </h3>
+
+            <pre><code>python manage.py collectstatic --noinput</code></pre>
+
+            <div class="success">
+
+                Static files should be successfully collected
+                before deployment.
+
+            </div>
+
+            <h3>
+                Final Django Check
+            </h3>
+
+            <pre><code>python manage.py check</code></pre>
+
+        </section>
+
+
+
+        <!-- =============================================
+             06
+             ============================================= -->
+
+        <section id="azure">
+
+            <span class="section-number">
+                06
+            </span>
+
+            <h2>
+                Azure App Service
+            </h2>
+
+            <p>
+                Use Azure App Service to host the Django
+                server-side application.
+            </p>
+
+            <h3>
+                Recommended Configuration
+            </h3>
+
+            <ul>
+
+                <li>
+                    Operating System:
+                    <strong>Linux</strong>
+                </li>
+
+                <li>
+                    Runtime:
+                    <strong>Python</strong>
+                </li>
+
+                <li>
+                    Deployment Source:
+                    <strong>GitHub</strong>
+                </li>
+
+                <li>
+                    Deployment Method:
+                    <strong>GitHub Actions</strong>
+                </li>
+
+            </ul>
+
+            <div class="info-box">
+
+                <strong>
+                    Azure Default Hostname
+                </strong>
+
+                <code>
+                    sukhwindersingh-gndadxcec2h0dbfr.canadacentral-01.azurewebsites.net
+                </code>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =============================================
+             07
+             ============================================= -->
+
+        <section id="github-azure">
+
+            <span class="section-number">
+                07
+            </span>
+
+            <h2>
+                Connecting GitHub to Azure
+            </h2>
+
+            <p>
+                Azure App Service can automatically deploy new
+                versions from your GitHub repository.
+            </p>
+
+            <h3>
+                Deployment Center
+            </h3>
+
+            <ol>
+
+                <li>
+                    Open Azure App Service.
+                </li>
+
+                <li>
+                    Open
+                    <strong>Deployment Center</strong>.
+                </li>
+
+                <li>
+                    Select
+                    <strong>GitHub</strong>
+                    as the source.
+                </li>
+
+                <li>
+                    Select repository:
+                    <strong>sukha002/onlineCV</strong>
+                </li>
+
+                <li>
+                    Select the
+                    <strong>main</strong>
+                    branch.
+                </li>
+
+                <li>
+                    Configure GitHub Actions.
+                </li>
+
+                <li>
+                    Save the deployment configuration.
+                </li>
+
+                <li>
+                    Check the deployment logs.
+                </li>
+
+            </ol>
+
+            <div class="success">
+
+                Deployment status should show
+                <strong>Success</strong>.
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =============================================
+             08
+             ============================================= -->
+
+        <section id="gunicorn">
+
+            <span class="section-number">
+                08
+            </span>
+
+            <h2>
+                Gunicorn Startup Configuration
+            </h2>
+
+            <p>
+                If Azure displays the default Python page instead
+                of your Django portfolio, the application startup
+                command needs to be configured.
+            </p>
+
+            <h3>
+                Azure Configuration
+            </h3>
+
+            <div class="path">
+
+                App Service →
+                Configuration →
+                General settings
+
+            </div>
+
+            <h3>
+                Startup Command
+            </h3>
+
+            <pre><code>gunicorn --bind=0.0.0.0 --timeout 600 onlineCV.wsgi</code></pre>
+
+            <p>
+                Save the configuration and allow Azure to restart
+                the application.
+            </p>
+
+            <div class="success">
+
+                After restarting Azure, test the default Azure
+                hostname and the <code>/about/</code> route.
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =============================================
+             09
+             ============================================= -->
+
+        <section id="testing">
+
+            <span class="section-number">
+                09
+            </span>
+
+            <h2>
+                Testing and Troubleshooting
+            </h2>
+
+            <p>
+                Always test the application systematically after
+                deployment.
+            </p>
+
+            <h3>
+                Test the Homepage
+            </h3>
+
+            <pre><code>/</code></pre>
+
+            <h3>
+                Test the About Page
+            </h3>
+
+            <pre><code>/about/</code></pre>
+
+            <h3>
+                Test Static Files
+            </h3>
+
+            <pre><code>/static/main/css/style.css</code></pre>
+
+            <h3>
+                Common Problems
+            </h3>
+
+            <ul>
+
+                <li>
+                    CSS returns 404.
+                </li>
+
+                <li>
+                    JavaScript does not load.
+                </li>
+
+                <li>
+                    Azure shows the default Python page.
+                </li>
+
+                <li>
+                    Django reports
+                    <code>DisallowedHost</code>.
+                </li>
+
+                <li>
+                    GitHub Actions deployment fails.
+                </li>
+
+                <li>
+                    Azure returns a server error.
+                </li>
+
+            </ul>
+
+            <h3>
+                Azure Log Stream
+            </h3>
+
+            <p>
+                For server-side errors, use:
+            </p>
+
+            <div class="path">
+
+                Azure App Service →
+                Monitoring →
+                Log stream
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =============================================
+             10
+             ============================================= -->
+
+        <section id="domain">
+
+            <span class="section-number">
+                10
+            </span>
+
+            <h2>
+                Custom Domain and HTTPS
+            </h2>
+
+            <p>
+                Configure the custom domain only after the Azure
+                default hostname is working correctly.
+            </p>
+
+            <h3>
+                Production Domain
+            </h3>
+
+            <div class="domain">
+                sukhwindertoor.com
+            </div>
+
+            <div class="domain">
+                www.sukhwindertoor.com
+            </div>
+
+            <h3>
+                DNS Configuration
+            </h3>
+
+            <p>
+                Azure will provide the DNS verification records
+                required for your domain.
+            </p>
+
+            <div class="warning">
+
+                Do not remove or replace DNS records blindly.
+                Verify each value supplied by Azure before
+                making changes.
+
+            </div>
+
+            <h3>
+                HTTPS
+            </h3>
+
+            <p>
+                After domain verification:
+            </p>
+
+            <ol>
+
+                <li>
+                    Configure HTTPS/TLS.
+                </li>
+
+                <li>
+                    Verify the SSL certificate.
+                </li>
+
+                <li>
+                    Enable HTTPS Only.
+                </li>
+
+                <li>
+                    Test both HTTP and HTTPS.
+                </li>
+
+            </ol>
+
+        </section>
+
+
+
+        <!-- =============================================
+             11
+             ============================================= -->
+
+        <section id="workflow">
+
+            <span class="section-number">
+                11
+            </span>
+
+            <h2>
+                Final Deployment Workflow
+            </h2>
+
+            <p>
+                Once the deployment is configured, the normal
+                workflow becomes simple.
+            </p>
+
+            <div class="workflow">
+
+                <div>
+                    1. Make changes locally
+                </div>
+
+                <div>↓</div>
+
+                <div>
+                    2. Test Django locally
+                </div>
+
+                <div>↓</div>
+
+                <div>
+                    3. Run manage.py check
+                </div>
+
+                <div>↓</div>
+
+                <div>
+                    4. Run collectstatic
+                </div>
+
+                <div>↓</div>
+
+                <div>
+                    5. Commit changes
+                </div>
+
+                <div>↓</div>
+
+                <div>
+                    6. Push to GitHub
+                </div>
+
+                <div>↓</div>
+
+                <div>
+                    7. GitHub Actions deploys
+                </div>
+
+                <div>↓</div>
+
+                <div>
+                    8. Azure App Service
+                </div>
+
+                <div>↓</div>
+
+                <div>
+                    9. Test production website
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =============================================
+             12
+             ============================================= -->
+
+        <section id="checklist">
+
+            <span class="section-number">
+                12
+            </span>
+
+            <h2>
+                Deployment Checklist
+            </h2>
+
+            <p>
+                Use this checklist before considering a deployment
+                complete.
+            </p>
+
+
+            <label>
+                <input type="checkbox">
+                Django homepage works locally
+            </label>
+
+            <label>
+                <input type="checkbox">
+                /about/ works locally
+            </label>
+
+            <label>
+                <input type="checkbox">
+                CSS works locally
+            </label>
+
+            <label>
+                <input type="checkbox">
+                JavaScript works locally
+            </label>
+
+            <label>
+                <input type="checkbox">
+                requirements.txt is updated
+            </label>
+
+            <label>
+                <input type="checkbox">
+                STATIC_URL is configured
+            </label>
+
+            <label>
+                <input type="checkbox">
+                STATIC_ROOT is configured
+            </label>
+
+            <label>
+                <input type="checkbox">
+                WhiteNoise is configured
+            </label>
+
+            <label>
+                <input type="checkbox">
+                collectstatic completed
+            </label>
+
+            <label>
+                <input type="checkbox">
+                python manage.py check passes
+            </label>
+
+            <label>
+                <input type="checkbox">
+                GitHub main branch is synchronized
+            </label>
+
+            <label>
+                <input type="checkbox">
+                GitHub Actions deployment succeeds
+            </label>
+
+            <label>
+                <input type="checkbox">
+                Gunicorn startup command is configured
+            </label>
+
+            <label>
+                <input type="checkbox">
+                Azure homepage works
+            </label>
+
+            <label>
+                <input type="checkbox">
+                Azure /about/ works
+            </label>
+
+            <label>
+                <input type="checkbox">
+                Azure static files work
+            </label>
+
+            <label>
+                <input type="checkbox">
+                Custom domain is verified
+            </label>
+
+            <label>
+                <input type="checkbox">
+                HTTPS works
+            </label>
+
+            <label>
+                <input type="checkbox">
+                Production website has been tested
+            </label>
+
+        </section>
+
+
+
+        <!-- =============================================
+             FINAL ARCHITECTURE
+             ============================================= -->
+
+        <section class="architecture">
+
+            <h2>
+                Final Architecture
+            </h2>
+
+            <div class="architecture-flow">
+
+                <div>
+                    Your Computer
+                </div>
+
+                <span>↓</span>
+
+                <div>
+                    Django Project
+                </div>
+
+                <span>↓</span>
+
+                <div>
+                    GitHub — sukha002/onlineCV
+                </div>
+
+                <span>↓</span>
+
+                <div>
+                    GitHub Actions
+                </div>
+
+                <span>↓</span>
+
+                <div>
+                    Azure App Service
+                </div>
+
+                <span>↓</span>
+
+                <div>
+                    Gunicorn
+                </div>
+
+                <span>↓</span>
+
+                <div>
+                    Django
+                </div>
+
+                <span>↓</span>
+
+                <div class="domain-box">
+                    sukhwindertoor.com
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+     ===================================================== -->
+
+<script>
+
+    /*
+     * Deployment Handbook
+     * Simple checklist persistence
+     */
+
+    const checkboxes =
+        document.querySelectorAll(
+            '#checklist input[type="checkbox"]'
+        );
+
+
+    checkboxes.forEach((checkbox, index) => {
+
+        const storageKey =
+            'deploymentbook-check-' + index;
+
+
+        // Restore saved checkbox state
+
+        checkbox.checked =
+            localStorage.getItem(storageKey) === 'true';
+
+
+        // Save when changed
+
+        checkbox.addEventListener('change', function () {
+
+            localStorage.setItem(
+                storageKey,
+                this.checked
+            );
+
+        });
+
+    });
+
+
+    /*
+     * Highlight the current section
+     * while scrolling.
+     */
+
+    const sections =
+        document.querySelectorAll(
+            '.content section[id]'
+        );
+
+    const navigationLinks =
+        document.querySelectorAll(
+            '.sidebar a'
+        );
+
+
+    window.addEventListener('scroll', function () {
+
+        let current = '';
+
+        sections.forEach(section => {
+
+            const sectionTop =
+                section.offsetTop - 150;
+
+            if (window.scrollY >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+
+        });
+
+
+        navigationLinks.forEach(link => {
+
+            link.classList.remove('active');
+
+            if (
+                link.getAttribute('href') ===
+                '#' + current
+            ) {
+
+                link.classList.add('active');
+
+            }
+
+        });
+
+    });
+
+</script>
+
+
+</body>
+
+</html>

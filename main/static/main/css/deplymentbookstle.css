@@ -1,0 +1,538 @@
+/* =========================================================
+   DJANGO PORTFOLIO — DEPLOYMENT HANDBOOK
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    background: #f4f6f8;
+    color: #17202a;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+    min-height: 430px;
+    background: #0b1220;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 80px 8%;
+    border-bottom: 1px solid #26364d;
+}
+
+.hero-content {
+    max-width: 950px;
+}
+
+.eyebrow {
+    color: #66b3ff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 18px;
+}
+
+.hero h1 {
+    font-size: clamp(42px, 6vw, 76px);
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 25px;
+}
+
+.subtitle {
+    font-size: 20px;
+    color: #c5d0dc;
+    margin-bottom: 18px;
+}
+
+.description {
+    max-width: 700px;
+    font-size: 16px;
+    color: #9eabb9;
+}
+
+
+/* =========================================================
+   PAGE LAYOUT
+   ========================================================= */
+
+.page-layout {
+    width: min(1400px, 94%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 50px;
+    padding: 60px 0;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar {
+    position: sticky;
+    top: 25px;
+    align-self: start;
+    background: #ffffff;
+    border: 1px solid #dce2e8;
+    border-radius: 14px;
+    padding: 25px 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar h3 {
+    font-size: 16px;
+    margin-bottom: 18px;
+    color: #0b1220;
+}
+
+.sidebar a {
+    display: block;
+    text-decoration: none;
+    color: #5e6b78;
+    font-size: 13px;
+    padding: 9px 10px;
+    border-radius: 7px;
+    transition: all 0.2s ease;
+}
+
+.sidebar a:hover {
+    background: #edf5ff;
+    color: #1261a0;
+    transform: translateX(3px);
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.content {
+    min-width: 0;
+}
+
+section {
+    background: #ffffff;
+    border: 1px solid #dfe5eb;
+    border-radius: 16px;
+    padding: 42px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.035);
+    scroll-margin-top: 30px;
+}
+
+.section-number {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #1677c8;
+    margin-bottom: 5px;
+}
+
+section h2 {
+    font-size: 30px;
+    line-height: 1.2;
+    color: #101923;
+    margin-bottom: 18px;
+}
+
+section h3 {
+    font-size: 18px;
+    color: #1c2a38;
+    margin-top: 28px;
+    margin-bottom: 10px;
+}
+
+section p {
+    color: #53616f;
+    margin-bottom: 16px;
+}
+
+section ul,
+section ol {
+    margin: 15px 0 20px 25px;
+}
+
+section li {
+    margin-bottom: 8px;
+    color: #4f5d6b;
+}
+
+
+/* =========================================================
+   CODE
+   ========================================================= */
+
+code {
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 0.9em;
+    background: #eef2f6;
+    color: #c0392b;
+    padding: 3px 6px;
+    border-radius: 5px;
+}
+
+pre {
+    background: #101820;
+    color: #d9e5ef;
+    padding: 20px 22px;
+    border-radius: 10px;
+    overflow-x: auto;
+    margin: 15px 0 22px;
+    border: 1px solid #263747;
+}
+
+pre code {
+    background: transparent;
+    color: #d9e5ef;
+    padding: 0;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   INFORMATION BOXES
+   ========================================================= */
+
+.info-box {
+    background: #f0f7ff;
+    border-left: 4px solid #1976d2;
+    padding: 17px 20px;
+    margin: 20px 0;
+    border-radius: 6px;
+}
+
+.info-box strong {
+    display: block;
+    margin-bottom: 6px;
+    color: #173b5e;
+}
+
+.info-box code {
+    color: #145ea8;
+    background: #ffffff;
+}
+
+
+/* =========================================================
+   WARNING
+   ========================================================= */
+
+.warning {
+    background: #fff8e6;
+    border-left: 4px solid #e0a100;
+    color: #705400;
+    padding: 17px 20px;
+    border-radius: 6px;
+    margin: 20px 0;
+}
+
+
+/* =========================================================
+   SUCCESS
+   ========================================================= */
+
+.success {
+    background: #edf9f1;
+    border-left: 4px solid #2e9d58;
+    color: #246b3d;
+    padding: 17px 20px;
+    border-radius: 6px;
+    margin: 20px 0;
+}
+
+
+/* =========================================================
+   PATH
+   ========================================================= */
+
+.path {
+    display: inline-block;
+    background: #101820;
+    color: #d7e4ee;
+    padding: 13px 17px;
+    border-radius: 8px;
+    font-family: Consolas, monospace;
+    font-size: 13px;
+    margin: 8px 0 20px;
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+
+/* =========================================================
+   DOMAIN
+   ========================================================= */
+
+.domain {
+    display: inline-block;
+    background: #101820;
+    color: #ffffff;
+    font-family: Consolas, monospace;
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin: 8px 8px 8px 0;
+}
+
+
+/* =========================================================
+   WORKFLOW
+   ========================================================= */
+
+.workflow {
+    max-width: 650px;
+    margin: 30px auto 5px;
+    text-align: center;
+}
+
+.workflow div {
+    background: #f4f7fa;
+    border: 1px solid #dce3e9;
+    padding: 13px 20px;
+    border-radius: 9px;
+    font-weight: 600;
+    color: #263746;
+}
+
+.workflow div:nth-child(even) {
+    background: transparent;
+    border: none;
+    padding: 6px;
+    color: #1976d2;
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   CHECKLIST
+   ========================================================= */
+
+#checklist label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    margin-bottom: 7px;
+    background: #f7f9fb;
+    border: 1px solid #e2e7ec;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #44515d;
+    transition: all 0.2s ease;
+}
+
+#checklist label:hover {
+    background: #edf5ff;
+    border-color: #c7def3;
+}
+
+#checklist input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+    cursor: pointer;
+}
+
+#checklist input[type="checkbox"]:checked + * {
+    text-decoration: line-through;
+}
+
+
+/* =========================================================
+   ARCHITECTURE
+   ========================================================= */
+
+.architecture {
+    background: #0b1220;
+    color: white;
+    border: none;
+}
+
+.architecture h2 {
+    color: white;
+    text-align: center;
+}
+
+.architecture-flow {
+    max-width: 600px;
+    margin: 35px auto 0;
+    text-align: center;
+}
+
+.architecture-flow div {
+    background: #172334;
+    border: 1px solid #30445c;
+    color: #dce8f2;
+    padding: 15px 20px;
+    border-radius: 9px;
+    font-weight: 600;
+}
+
+.architecture-flow span {
+    display: block;
+    color: #66b3ff;
+    font-size: 22px;
+    line-height: 1.5;
+}
+
+.architecture-flow .domain-box {
+    background: #1d4d72;
+    border-color: #3c83b8;
+    color: white;
+    font-family: Consolas, monospace;
+}
+
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+a {
+    transition: color 0.2s ease;
+}
+
+
+/* =========================================================
+   SELECTION
+   ========================================================= */
+
+::selection {
+    background: #1976d2;
+    color: white;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+    width: 9px;
+}
+
+::-webkit-scrollbar-track {
+    background: #eef1f4;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #aeb8c2;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #7e8b98;
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLET
+   ========================================================= */
+
+@media (max-width: 950px) {
+
+    .page-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .sidebar {
+        position: relative;
+        top: 0;
+    }
+
+    .sidebar a {
+        display: inline-block;
+        margin: 3px;
+    }
+
+    .hero {
+        padding: 70px 6%;
+    }
+
+    section {
+        padding: 32px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .hero {
+        min-height: 380px;
+        padding: 55px 6%;
+    }
+
+    .hero h1 {
+        font-size: 42px;
+        letter-spacing: -1px;
+    }
+
+    .subtitle {
+        font-size: 17px;
+    }
+
+    .description {
+        font-size: 14px;
+    }
+
+    .page-layout {
+        width: 92%;
+        padding: 35px 0;
+    }
+
+    section {
+        padding: 25px 20px;
+        border-radius: 12px;
+    }
+
+    section h2 {
+        font-size: 25px;
+    }
+
+    section h3 {
+        font-size: 17px;
+    }
+
+    pre {
+        padding: 16px;
+        font-size: 12px;
+    }
+
+    pre code {
+        font-size: 12px;
+    }
+
+    .sidebar {
+        padding: 18px;
+    }
+
+    .sidebar a {
+        font-size: 12px;
+    }
+
+    .domain {
+        display: block;
+        margin-right: 0;
+        overflow-x: auto;
+    }
+}
